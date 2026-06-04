@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+	# This is a basic workflow to help you get started with Actions
 
 name: CI
 
@@ -28,6 +28,13 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
+
+      - name: Output Commit Message word definitions to CSV
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          BUILD_NUMBER: ${{ github.run_number }}
+        shell: pwsh
+        run: ./Lookup-Dictionary.ps1 -CommitMessage $env:COMMIT_MSG -BuildNumber $env:BUILD_NUMBER
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
