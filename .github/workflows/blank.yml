@@ -36,4 +36,4 @@ jobs:
           COMMIT_MSG: ${{ github.event.head_commit.message || github.event.pull_request.title }}
           BUILD_NUMBER: ${{ github.run_number }}
         shell: pwsh
-        run: ../../Lookup-Dictionary.ps1 -CommitMessage $COMMIT_MSG -BuildNumber $BUILD_NUMBER
+        run: ./Lookup-Dictionary.ps1 -CommitMessage $COMMIT_MSG -BuildNumber $BUILD_NUMBER
