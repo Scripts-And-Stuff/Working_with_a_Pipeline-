@@ -27,7 +27,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.  COMMENTED OUT PER ERROR MESSAGE.  TROUBLESHOOTING.
       #- uses: actions/checkout@v4
       - name: List repo files
-        run: ls -R
+        run: |
+             echo "Branch: $GITHUB_REF"
+             ls -R .
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
