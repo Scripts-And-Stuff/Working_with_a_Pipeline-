@@ -69,9 +69,8 @@ foreach ($Word in $outputWords) {
     catch {
         #Read-Host "$_`nPress enter to exit"
         Append-CommitMessageDefinitionLog  -word $word -definition $_ 
-        #exit 0
+        exit 0
     }
 }
 
-
-#exit 0
+exit 0
