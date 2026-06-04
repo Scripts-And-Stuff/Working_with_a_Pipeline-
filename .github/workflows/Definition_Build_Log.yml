@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Definition_Build_Log
 
 # Controls when the workflow will run
 on:
@@ -24,18 +24,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.  COMMENTED OUT PER ERROR MESSAGE.  TROUBLESHOOTING.
-      #- uses: actions/checkout@v4
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it. 
+      - uses: actions/checkout@v6
       - name: List repo files
-        run: ls -R
+        run: |
+             echo "Branch: $GITHUB_REF"
+             ls -R .
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
 
       - name: Output Commit Message word definitions to CSV
-        env:
-          COMMIT_MSG: ${{ github.event.head_commit.message || github.event.pull_request.title }}
-          BUILD_NUMBER: ${{ github.run_number }}
         shell: pwsh
-        run: ./Lookup-Dictionary.ps1 -CommitMessage $COMMIT_MSG -BuildNumber $BUILD_NUMBER
+        run: ./Lookup-Dictionary.ps1 -CommitMessage "${{ github.event.head_commit.message || github.event.pull_request.title }}" -BuildNumber "${{ github.run_number }}"

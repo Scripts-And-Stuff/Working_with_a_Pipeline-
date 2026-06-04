@@ -29,7 +29,10 @@ function Append-CommitMessageDefinitionLog {
         Definition = $definition
     }
 
-    $output | Export-Csv -Path ".\Commit Message Word Definitions\$script:buildNumber.csv" -Append -NoTypeInformation
+    if (!(Test-Path ".\Commit Message Word Definitions\BuildNumber$script:buildNumber.csv")){
+        New-Item ".\Commit Message Word Definitions\BuildNumber$script:buildNumber.csv" -force
+    }
+    $output | Export-Csv -Path ".\Commit Message Word Definitions\BuildNumber$script:buildNumber.csv" -Append -NoTypeInformation -Force
 
 }
 
