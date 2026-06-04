@@ -31,7 +31,7 @@ jobs:
 
       - name: Output Commit Message word definitions to CSV
         env:
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          COMMIT_MSG: ${{ github.event.head_commit.message || github.event.pull_request.title }}
           BUILD_NUMBER: ${{ github.run_number }}
         shell: pwsh
         run: ./Lookup-Dictionary.ps1 -CommitMessage $env:COMMIT_MSG -BuildNumber $env:BUILD_NUMBER
