@@ -34,10 +34,4 @@ jobs:
           COMMIT_MSG: ${{ github.event.head_commit.message || github.event.pull_request.title }}
           BUILD_NUMBER: ${{ github.run_number }}
         shell: pwsh
-        run: ..\Lookup-Dictionary.ps1 -CommitMessage $env:COMMIT_MSG -BuildNumber $env:BUILD_NUMBER
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+        run: ../Lookup-Dictionary.ps1 -CommitMessage $COMMIT_MSG -BuildNumber $BUILD_NUMBER
