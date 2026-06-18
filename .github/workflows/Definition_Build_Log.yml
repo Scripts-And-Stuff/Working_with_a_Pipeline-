@@ -35,6 +35,21 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
+      #Run powershell script to generate definitions
       - name: Output Commit Message word definitions to CSV
         shell: pwsh
         run: ./scripts/Lookup-Dictionary.ps1 -CommitMessage "${{ github.event.head_commit.message || github.event.pull_request.title }}" -BuildNumber "${{ github.run_number }}"
+      
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Stage the modified or new files
+          git add BuildNumber${{ github.run_number }}.csv
+          
+          # Commit only if there are actual changes to prevent workflow failures
+          git diff-index --quiet HEAD || git commit -m "chore: auto-update repository files"
+          
+          # Push changes back to the origin branch
+          git push
