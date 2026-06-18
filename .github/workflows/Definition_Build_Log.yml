@@ -46,7 +46,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
           # Stage the modified or new files
-          git add BuildNumber${{ github.run_number }}.csv
+          git add ./Commit Message Word Definitions/BuildNumber${{ github.run_number }}.csv
           
           # Commit only if there are actual changes to prevent workflow failures
           git diff-index --quiet HEAD || git commit -m "chore: auto-update repository files"
